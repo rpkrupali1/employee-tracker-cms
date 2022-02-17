@@ -1,4 +1,6 @@
 const inquirer = require('inquirer');
+const db = require('./db/connection');
+
 const action = () => {
     return inquirer.prompt([
         {
@@ -11,10 +13,10 @@ const action = () => {
     .then(answer => {
         switch(answer.category){
             case 'view all departments' :
-                console.log('view all departments'); //to do - db query 
+                viewAllDepartment(); 
                 break;
             case 'view all roles' :
-                console.log('view all roles');  //to do - db query 
+                viewAllRoles(); 
                 break; 
             case 'view all employees' :
                 console.log('view all employees');  //to do - db query 
@@ -26,10 +28,10 @@ const action = () => {
                 addRole();
                 break;
             case 'add an employee' :
-                console.log('add an employee'); //to do - add another inquirer
+                addEmployee();
                 break;
             case 'update an employee role' :
-                console.log('update an employee role'); //to do - add another inquirer
+                updateEmployee();
                 break;
         }
     });
@@ -74,5 +76,79 @@ const addRole = () => {
     ])
     .then(role => {
         console.log(role); //to do add role to database
+    })
+}
+
+const addEmployee = () => {
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'first_name',
+            message: "What is the employee's first name? (Required)",
+            validate: first_name => first_name ? true : false
+        },
+        {
+            type: 'input',
+            name: 'last_name',
+            message: "What is the employee's last name? (Required)",
+            validate: last_name => last_name ? true : false
+        },
+        {
+            type: 'list',
+            name: 'role',
+            message: "What is the employee's role",
+            choices: ['Engineer','Accountant'] //To do provide this list from sql
+        },
+        {
+            type: 'list',
+            name: 'manager',
+            message: "Who is the employee's manager",
+            choices: ['John','Mike'] //To do provide this list from sql
+        }
+    ])
+    .then(employee => {
+        console.log(employee);
+        //To Do add this employee to database
+    })
+}
+
+const updateEmployee = () => {
+    inquirer.prompt([
+        {
+            type: 'list',
+            name: 'name',
+            message: 'Which employees role do you want to update? (Required)',
+            choices: ['rafe'] //To do get all employees name from database
+        },
+        {
+            type: 'list',
+            name: 'role',
+            message: 'Which role do you want to assign the selected employee?',
+            choices: ['Manager'] //To do get list of role names
+        }
+    ]);
+}
+
+const viewAllDepartment = () => {
+    const sql = `SELECT * FROM department;`
+    const departments = db.query(sql,(err,rows) => {
+        if(err){
+            console.log(err.message);
+            return;
+        }
+        console.log(rows);
+        //To do : conert json to table format            
+    });
+}
+
+const viewAllRoles = () => {
+    const sql = `SELECT * FROM role;`;
+    db.query(sql,(err,rows)=>{
+        if(err){
+            console.log(err.message);
+            return;
+        }
+        console.log(rows);
+        //To do : conert json to table format  
     })
 }
