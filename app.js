@@ -8,7 +8,12 @@ const action = () => {
             type: 'list',
             name: 'category',
             message: 'What would you like to do?',
-            choices: ['view all departments', 'view all roles', 'view all employees', 'add a department', 'add a role', 'add an employee', 'update an employee role']
+            choices: ['view all departments', 'view all roles', 'view all employees', 
+                    'add a department', 'add a role', 'add an employee', 
+                    'update an employee role','update employee manager',
+                    'view employees by manager','view employees by department',
+                    'delete department','delete role','delete employee',
+                    'view utilized budget']
         }
     ])
     .then(answer => {
@@ -33,6 +38,27 @@ const action = () => {
                 break;
             case 'update an employee role' :
                 updateEmployee();
+                break;
+            case 'update employee manager' :
+                console.log('update employee manager'); //To do: create function
+                break;
+            case 'view employees by manager' :
+                console.log('view employees by manager'); //To do: create function
+                break;
+            case 'view employees by department' :
+                console.log('view employees by department'); //To do: create function
+                break;
+            case 'delete department' :
+                console.log('delete department'); //To do: create function
+                break;
+            case 'delete role' :
+                console.log('delete role'); //To do: create function
+                break;
+            case 'delete employee' :
+                console.log('delete employee'); //To do: create function
+                break;
+            case 'view utilized budget' :
+                console.log('view utilized budget'); //To do: create function
                 break;
         }
     });
