@@ -48,7 +48,18 @@ const addDepartment = () =>{
         }
     ])
     .then(department => {
-        console.log(`Added ${department.name} department to database.`); //to do add department to database
+        //add department to database
+        const query = `
+        INSERT INTO department(name)
+        VALUES (?);`
+        db.query(query,department.name,(err,result) => {
+            if(err){
+                console.log({error: err.message});
+                return;
+            }
+            console.log(`Added ${department.name} department to the database`);
+            action();
+        })
     });
 }
 
