@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const db = require('./db/connection');
+const cTable = require('console.table');
 
 const action = () => {
     return inquirer.prompt([
@@ -37,8 +38,6 @@ const action = () => {
     });
 }
 
-action();
-
 const addDepartment = () =>{
     inquirer.prompt([
         {
@@ -71,7 +70,7 @@ const addRole = () => {
             type: 'list',
             name: 'department',
             message: 'What department this role belongs to?',
-            choices: ['Technology','Finance'] //to do get this list from database query
+            choices: ['dpt1','dpt2']//getDepartmentsNames() //to do get this list from database query
         }
     ])
     .then(role => {
@@ -136,8 +135,9 @@ const viewAllDepartment = () => {
             console.log(err.message);
             return;
         }
-        console.log(rows);
-        //To do : conert json to table format            
+        //convert json to table format
+        console.table(rows);
+        action(); 
     });
 }
 
@@ -148,7 +148,36 @@ const viewAllRoles = () => {
             console.log(err.message);
             return;
         }
-        console.log(rows);
-        //To do : conert json to table format  
-    })
+        //json to table format
+        console.table(rows);
+        action();
+    });
 }
+
+const getAlldepartments = () => {
+    const sql = `SELECT * FROM department;`;
+    return new Promise((resolve,reject) => {
+        db.query(sql,(err,rows)=>{
+            if(err){
+                reject(err)
+                return;
+            }
+            resolve(rows);
+        });
+    });
+}
+
+const getDepartmentsNames = () => {
+    getAlldepartments().then(rows => {
+        // console.log(rows);
+        const name = [];
+        rows.forEach(element => {
+            name.push(element.name);
+        });
+        console.log(name);
+        return name;       
+    });
+}
+
+action();
+//console.log(getDepartmentsNames());
