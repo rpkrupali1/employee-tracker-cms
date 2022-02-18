@@ -81,12 +81,23 @@ const addRole = () => {
             type: 'list',
             name: 'department',
             message: 'What department this role belongs to?',
-            choices: ['dpt1','dpt2']//getDepartmentsNames() //to do get this list from database query
+            choices: ['Technology','dpt2']//getDepartmentsNames() //to do get this list from database query
         }
     ])
     .then(role => {
-        console.log(role); //to do add role to database
-    })
+        console.log(role); 
+        //add role to database
+        const sql = `INSERT INTO role(title, salary, department_id)
+        VALUES(?,?,(SELECT id FROM department WHERE name = ?));`;
+        const params = [role.title,role.salary,role.department];
+        db.query(sql,params,(err,result)=> {
+            if(err)
+                console.log(`There is an error ${err.message} when adding role to database`);
+            else
+                console.log(`Added ${role.title} role to database`);        
+            action();
+        });
+    });
 }
 
 const addEmployee = () => {
