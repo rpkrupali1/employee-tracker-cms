@@ -74,6 +74,18 @@ class Db{
         const params = [role,firstname,lastname];
         return this.connection.promise().query(query,params);
     }
+
+    findEmployeesByManager(){
+        const sql = `
+        SELECT
+            CONCAT(m.first_name, ' ',m.last_name ) AS Manager,
+            CONCAT(e.first_name, ' ', e.last_name) AS 'Employees'
+        FROM employee e
+        INNER JOIN employee m ON
+            m.id = e.manager_id
+        ORDER BY Manager; `
+        return this.connection.promise().query(sql);
+    }
 }
 
 module.exports = new Db(connection);
