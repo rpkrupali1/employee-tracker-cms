@@ -46,10 +46,9 @@ const action = () => {
                 break;
             case 'view employees by manager' :
                 viewEmployeesByManager();
-                console.log('view employees by manager'); //To do: create function
                 break;
             case 'view employees by department' :
-                console.log('view employees by department'); //To do: create function
+                viewEmployeesByDepartment();
                 break;
             case 'delete department' :
                 console.log('delete department'); //To do: create function
@@ -216,7 +215,14 @@ const viewEmployeesByManager = () => {
     Db.findEmployeesByManager().then(([rows]) => {
         console.table(rows);
         action();
-    })
+    });
+}
+
+const viewEmployeesByDepartment = ()=>{
+    Db.findEmployeesByDepartment().then(([rows]) => {
+        console.table(rows);
+        action();
+    });
 }
 
 action();

@@ -36,8 +36,7 @@ class Db{
         return this.connection.promise().query(sqlQuery,params);
     }
 
-    addEmployee(first_name,last_name,role,manager){        
-        
+    addEmployee(first_name,last_name,role,manager){       
         if(manager==='None'){
             const query = `
             INSERT INTO employee(first_name, last_name, role_id)
@@ -55,6 +54,10 @@ class Db{
         const mg_lastname = manager.split(" ")[1];
         const mQuery = `SELECT * FROM employee WHERE first_name = ? AND last_name = ?;`;
         const mParams = [mg_firstname, mg_lastname];
+
+        this.connection.promise().query('select * from employee').then(row => {
+            console.log(row);
+        })
 
         this.connection.promise().query(mQuery,mParams).then(([row]) => {
             console.log(row);
@@ -84,6 +87,20 @@ class Db{
         INNER JOIN employee m ON
             m.id = e.manager_id
         ORDER BY Manager; `
+        return this.connection.promise().query(sql);
+    }
+
+    findEmployeesByDepartment(){
+        const sql = `
+            SELECT
+                CONCAT(e.first_name, ' ',e.last_name ) As 'Name',
+                d.name AS 'Department'
+            FROM employee e
+            LEFT JOIN role r ON
+                r.id = e.role_id
+            LEFT JOIN department d on
+                d.id = r.department_id
+            ORDER BY Department;`;
         return this.connection.promise().query(sql);
     }
 }
