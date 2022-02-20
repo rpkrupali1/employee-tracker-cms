@@ -1,36 +1,36 @@
 # employee-tracker-cms
 
-  This is command-line application from to manage a company's employee database.
+This is command-line application from to manage a company's employee database.
 
-   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  [![License: Apache](https://img.shields.io/badge/License-Apache-yellow.svg)](https://opensource.org/licenses/Apache) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  [![License: Apache](https://img.shields.io/badge/License-Apache-yellow.svg)](https://opensource.org/licenses/Apache) 
 
-  # Table of contents
-  * [Purpose](#purpose)
-  * [Usage](#user-story)
-  * [Technologies Used](#technologies-used)
-  * [Run Instructions](#run-instructions)
-  * [More Information](#more-information)
-  * [Contributors](#contributors)
-  * [License](#license)
+## Table of contents
+* [Purpose](#purpose)
+* [Usage](#user-story)
+* [Technologies Used](#technologies-used)
+* [Run Instructions](#run-instructions)
+* [More Information](#more-information)
+* [Contributors](#contributors)
+* [License](#license)
 
-  ## Purpose
-  To build content management system (CMS)
+## Purpose
+To build content management system (CMS)
 
-  ## User Story
+## User Story
     AS A business owner
     I WANT to be able to view and manage the departments, roles, and employees in my company
     SO THAT I can organize and plan my business
 
-  ## Technologies Used
-  - Java Script
-  - NodeJs (Inquirer for command prompt)
-  - Mysql2
+## Technologies Used
+- Java Script
+- NodeJs (Inquirer for command prompt)
+- Mysql2
 
-  
-  ## Run Instructions
-    npm app
 
-    Please refer below a walkthrough video:
+## Run Instructions
+npm app
+
+Please refer below a walkthrough video:
  ![Test](./images/Testruns.PNG)
 
   ## More Information
@@ -55,10 +55,16 @@
     THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 
 
-  ## Contributors
-  Krupali
-  
-  ## License
-  Please consult the attached LICENSE file for details. All rights not explicitly granted by the MIT,Apache License are reserved by Original Author.    
+### Database Design
+![Database](./Images/database-design.png)
 
-  Copyright (c) 2021
+### Wiremock
+![Wiremock](./Images/wiremock.png)
+
+## Contributors
+Krupali
+
+## License
+Please consult the attached LICENSE file for details. All rights not explicitly granted by the MIT,Apache License are reserved by Original Author.    
+
+Copyright (c) 2021
