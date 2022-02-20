@@ -138,8 +138,7 @@ const addRole = () => {
     });    
 }
 
-const addEmployee = () => {
-    const { first_name,last_name,role,manager} = "";    
+const addEmployee = () => {   
     Db.findAllRoles().then(([rows]) => {
         const roles = rows.map((row) => row.title);
         db.findAllEmployees().then(([rows]) =>{
@@ -173,6 +172,7 @@ const addEmployee = () => {
             ])
             .then(employee => {
                 Db.addEmployee(employee.first_name,employee.last_name,employee.role,employee.manager).then(result => {
+                    //To do when manager is not null
                     console.log(`Added ${employee.first_name} ${employee.last_name} to the database`);
                     action();
                 });
@@ -181,48 +181,34 @@ const addEmployee = () => {
     });
 }
 
-// const updateEmployee = () => {
-//     inquirer.prompt([
-//         {
-//             type: 'list',
-//             name: 'name',
-//             message: 'Which employees role do you want to update? (Required)',
-//             choices: ['rafe'] //To do get all employees name from database
-//         },
-//         {
-//             type: 'list',
-//             name: 'role',
-//             message: 'Which role do you want to assign the selected employee?',
-//             choices: ['Manager'] //To do get list of role names
-//         }
-//     ]);
-// }
+const updateEmployee = () => {
+    Db.findAllRoles().then(([rows]) => {
+        const roles = rows.map((row) => row.title);
+        db.findAllEmployees().then(([rows]) =>{
+            const employees = rows.map(row => row.first_name + " " + row.last_name);
 
-
-// const getAlldepartments = () => {
-//     const sql = `SELECT * FROM department;`;
-//     return new Promise((resolve,reject) => {
-//         db.query(sql,(err,rows)=>{
-//             if(err){
-//                 reject(err)
-//                 return;
-//             }
-//             resolve(rows);
-//         });
-//     });
-// }
-
-// const getDepartmentsNames = () => {
-//     getAlldepartments().then(rows => {
-//         // console.log(rows);
-//         const name = [];
-//         rows.forEach(element => {
-//             name.push(element.name);
-//         });
-//         console.log(name);
-//         return name;       
-//     });
-// }
+            inquirer.prompt([
+                {
+                    type: 'list',
+                    name: 'name',
+                    message: "Which employee's role do you want to update? (Required)",
+                    choices: employees
+                },
+                {
+                    type: 'list',
+                    name: 'role',
+                    message: 'Which role do you want to assign to the selected employee?',
+                    choices: roles
+                }
+            ])
+            .then(employee => {
+                Db.updateEmployeeRole(employee.name,employee.role).then(row => {
+                    console.log(`Updated ${employee.name} role to ${employee.role}`);
+                    action();
+                });
+            })
+        });
+    });
+}
 
 action();
-//console.log(getDepartmentsNames());

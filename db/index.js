@@ -63,6 +63,17 @@ class Db{
             return this.connection.promise().query(query,params);
         });        
     }
+
+    updateEmployeeRole(name,role){
+        const firstname = name.split(" ")[0];
+        const lastname = name.split(" ")[1];
+        const query = `
+            UPDATE employee
+            SET role_id = ( SELECT id FROM role WHERE title = ? )
+            WHERE first_name = ? AND last_name = ?`;
+        const params = [role,firstname,lastname];
+        return this.connection.promise().query(query,params);
+    }
 }
 
 module.exports = new Db(connection);
