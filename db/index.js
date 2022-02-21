@@ -110,6 +110,13 @@ class Db{
             WHERE name = ?`;
         return this.connection.promise().query(sql,name);
     }
+
+    deleteRole(title){
+        const sql = `
+            DELETE FROM role
+            WHERE title = ?`;
+        return this.connection.promise().query(sql,title);
+    }
 }
 
 module.exports = new Db(connection);

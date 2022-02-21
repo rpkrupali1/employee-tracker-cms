@@ -52,10 +52,9 @@ const action = () => {
                 break;
             case 'delete department' :
                 deleteDepartment();
-                console.log('delete department'); //To do: create function
                 break;
             case 'delete role' :
-                console.log('delete role'); //To do: create function
+                deleteRole();
                 break;
             case 'delete employee' :
                 console.log('delete employee'); //To do: create function
@@ -240,6 +239,26 @@ const deleteDepartment = () => {
         .then(department => {
             Db.deleteDepartment(department.name).then(([row]) =>{
                 console.log(`Deleted department ${department.name}`);
+                action();
+            });
+        });
+    });
+}
+
+const deleteRole = () => {
+    Db.findAllRoles().then(([rows]) => {
+        const titles = rows.map(row => row.title);
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'title',
+                message: 'Select the role that needs to be deleted',
+                choices: titles
+            }
+        ])
+        .then(role => {
+            Db.deleteRole(role.title).then(([row]) =>{
+                console.log(`Deleted role ${role.title}`);
                 action();
             });
         });
