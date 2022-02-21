@@ -117,6 +117,16 @@ class Db{
             WHERE title = ?`;
         return this.connection.promise().query(sql,title);
     }
+
+    deleteEmployee(name){
+        const first_name = name.split(" ")[0];
+        const last_name = name.split(" ")[1];
+        const sql = `
+            DELETE FROM employee
+            WHERE first_name = ? AND last_name = ?`;
+        const params = [first_name,last_name];
+        return this.connection.promise().query(sql,params);
+    }
 }
 
 module.exports = new Db(connection);

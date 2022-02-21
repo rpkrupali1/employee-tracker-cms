@@ -57,7 +57,7 @@ const action = () => {
                 deleteRole();
                 break;
             case 'delete employee' :
-                console.log('delete employee'); //To do: create function
+                deleteEmployee();
                 break;
             case 'view utilized budget' :
                 console.log('view utilized budget'); //To do: create function
@@ -259,6 +259,26 @@ const deleteRole = () => {
         .then(role => {
             Db.deleteRole(role.title).then(([row]) =>{
                 console.log(`Deleted role ${role.title}`);
+                action();
+            });
+        });
+    });
+}
+
+const deleteEmployee = () => {
+    Db.findAllEmployees().then(([rows]) => {
+        const names = rows.map(row => row.first_name + " " + row.last_name);
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'name',
+                message: 'Select the employee that needs to be deleted',
+                choices: names
+            }
+        ])
+        .then(employee => {
+            Db.deleteEmployee(employee.name).then(([row]) =>{
+                console.log(`Deleted employee ${employee.name}`);
                 action();
             });
         });
