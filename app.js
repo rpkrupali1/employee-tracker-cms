@@ -60,6 +60,7 @@ const action = () => {
                 deleteEmployee();
                 break;
             case 'view utilized budget' :
+                viewUtilizedBudget();
                 console.log('view utilized budget'); //To do: create function
                 break;
         }
@@ -282,6 +283,13 @@ const deleteEmployee = () => {
                 action();
             });
         });
+    });
+}
+
+const viewUtilizedBudget = () => {
+    Db.findUtilizedBudget().then(([rows])=>{
+        console.table(rows);
+        action();
     });
 }
 

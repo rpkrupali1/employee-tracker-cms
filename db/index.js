@@ -127,6 +127,21 @@ class Db{
         const params = [first_name,last_name];
         return this.connection.promise().query(sql,params);
     }
+
+    findUtilizedBudget(){
+        const sql = `
+        SELECT
+            SUM(r.salary) As 'utilized budget',
+            d.name AS 'Department'
+        FROM employee e
+        LEFT JOIN role r ON
+            r.id = e.role_id
+        LEFT JOIN department d on
+            d.id = r.department_id
+        group by Department
+        ORDER BY Department;`;
+        return this.connection.promise().query(sql);    
+    }
 }
 
 module.exports = new Db(connection);
