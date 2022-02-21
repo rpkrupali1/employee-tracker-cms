@@ -51,6 +51,7 @@ const action = () => {
                 viewEmployeesByDepartment();
                 break;
             case 'delete department' :
+                deleteDepartment();
                 console.log('delete department'); //To do: create function
                 break;
             case 'delete role' :
@@ -222,6 +223,26 @@ const viewEmployeesByDepartment = ()=>{
     Db.findEmployeesByDepartment().then(([rows]) => {
         console.table(rows);
         action();
+    });
+}
+
+const deleteDepartment = () => {
+    Db.findAllDepartment().then(([rows]) => {
+        const name = rows.map(row => row.name);
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'name',
+                message: 'Select the department that needs to be deleted',
+                choices: name
+            }
+        ])
+        .then(department => {
+            Db.deleteDepartment(department.name).then(([row]) =>{
+                console.log(`Deleted department ${department.name}`);
+                action();
+            });
+        });
     });
 }
 

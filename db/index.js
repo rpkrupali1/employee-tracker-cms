@@ -103,6 +103,13 @@ class Db{
             ORDER BY Department;`;
         return this.connection.promise().query(sql);
     }
+
+    deleteDepartment(name){
+        const sql = `
+            DELETE FROM department
+            WHERE name = ?`;
+        return this.connection.promise().query(sql,name);
+    }
 }
 
 module.exports = new Db(connection);
