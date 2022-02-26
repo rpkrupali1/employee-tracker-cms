@@ -31,7 +31,7 @@ To build content management system (CMS)
 node app
 
 Please refer below a walkthrough video:
- ![Test](./images/Testruns.PNG)
+ [Watch video](./Assets//EmployeeTracker.mp4)
 
   ## More Information
   Please find below acceptance criteria of project:

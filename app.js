@@ -12,7 +12,7 @@ const action = () => {
             message: 'What would you like to do?',
             choices: ['view all departments', 'view all roles', 'view all employees', 
                     'add a department', 'add a role', 'add an employee', 
-                    'update an employee role','update employee manager',
+                    'update an employee role',
                     'view employees by manager','view employees by department',
                     'delete department','delete role','delete employee',
                     'view utilized budget']
