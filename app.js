@@ -141,9 +141,15 @@ const addRole = () => {
 
 const addEmployee = () => {   
     Db.findAllRoles().then(([rows]) => {
-        const roles = rows.map((row) => row.title);
+        const roles = rows.map(({id, title}) => ({
+            name:title,
+            value:id
+        }));
         db.findAllEmployees().then(([rows]) =>{
-            const manager = rows.map(row => row.first_name + " " + row.last_name);
+            const manager = rows.map(({id, first_name,last_name}) =>({
+                name : `${first_name} ${last_name}`,
+                value: id
+            }));
             manager.push("None");
             inquirer.prompt([
                 {
@@ -173,7 +179,6 @@ const addEmployee = () => {
             ])
             .then(employee => {
                 Db.addEmployee(employee.first_name,employee.last_name,employee.role,employee.manager).then(result => {
-                    //To do when manager is not null
                     console.log(`Added ${employee.first_name} ${employee.last_name} to the database`);
                     action();
                 });

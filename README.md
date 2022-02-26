@@ -28,7 +28,7 @@ To build content management system (CMS)
 
 
 ## Run Instructions
-npm app
+node app
 
 Please refer below a walkthrough video:
  ![Test](./images/Testruns.PNG)

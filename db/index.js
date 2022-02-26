@@ -48,23 +48,11 @@ class Db{
         //To do: fix error when employee is not null
         const query = `
         INSERT INTO employee(first_name, last_name, role_id, manager_id)
-        VALUES(?,?,(SELECT id FROM role WHERE title = ?),?);`;
+        VALUES(?,?,?,?);`;
 
-        const mg_firstname = manager.split(" ")[0];
-        const mg_lastname = manager.split(" ")[1];
-        const mQuery = `SELECT * FROM employee WHERE first_name = ? AND last_name = ?;`;
-        const mParams = [mg_firstname, mg_lastname];
-
-        this.connection.promise().query('select * from employee').then(row => {
-            console.log(row);
-        })
-
-        this.connection.promise().query(mQuery,mParams).then(([row]) => {
-            console.log(row);
-            const manager_id = row[0].id;
-            const params = [first_name,last_name,role,manager_id];
-            return this.connection.promise().query(query,params);
-        });        
+        const param = [first_name,last_name,role,manager]
+        console.log(role, manager, param);
+        return this.connection.promise().query(query,param);        
     }
 
     updateEmployeeRole(name,role){
