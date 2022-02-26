@@ -150,7 +150,10 @@ const addEmployee = () => {
                 name : `${first_name} ${last_name}`,
                 value: id
             }));
-            manager.push("None");
+            manager.push({
+                name: "None",
+                value: null}
+            );
             inquirer.prompt([
                 {
                     type: 'input',
