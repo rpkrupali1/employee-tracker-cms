@@ -31,7 +31,17 @@ To build content management system (CMS)
 node app
 
 Please refer below a walkthrough video:
- [Watch video](./Assets//EmployeeTracker.mp4)
+ [![Watch video](./Assets//EmployeeTracker.mp4)]
+ [(https://github.com/rpkrupali1/employee-tracker-cms/blob/main/Assets/EmployeeTracker.mp4 "Watch video")]
+ 
+ 
+ https://github.com/rpkrupali1/employee-tracker-cms/blob/main/Assets/EmployeeTracker.mp4
+ 
+ 
+ https://drive.google.com/file/d/1mdHs71LpSLidTejYPUp_JlqVD-lHtrpJ/view
+ 
+ [![Watch video](http://i.imgur.com/7YTMFQp.png)](https://drive.google.com/file/d/1mdHs71LpSLidTejYPUp_JlqVD-lHtrpJ/view "Watch video - Click to Watch!")
+
 
   ## More Information
   Please find below acceptance criteria of project:
@@ -60,7 +70,7 @@ Please refer below a walkthrough video:
 
 ### Wiremock
 ![Wiremock](./Images/wiremock.png)
-https://github.com/rpkrupali1/employee-tracker-cms/blob/main/Assets/EmployeeTracker.mp4
+
 
 ## Contributors
 Krupali
